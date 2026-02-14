@@ -1,0 +1,24 @@
+/* src/routes/counter/style.css */
+
+/* ---------------------------------
+   Tailwind layer access (local)
+---------------------------------- */
+
+/*@tailwind utilities;
+*/
+
+/* ---------------------------------
+   Route styles
+---------------------------------- */
+
+section {
+  @apply space-y-4;
+}
+
+output {
+  @apply text-3xl font-semibold;
+}
+
+button {
+  @apply px-4 py-2 border rounded;
+}

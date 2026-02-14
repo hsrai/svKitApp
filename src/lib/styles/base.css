@@ -1,0 +1,15 @@
+html {
+  @apply bg-background text-text;
+}
+
+main {
+  @apply min-h-screen;
+}
+
+a {
+  @apply text-secondary underline;
+}
+
+a:hover {
+  @apply text-accent;
+}

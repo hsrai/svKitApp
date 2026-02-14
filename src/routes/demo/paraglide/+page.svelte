@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { setLocale } from '$lib/paraglide/runtime';
-	import { m } from '$lib/paraglide/messages.js';
+  import { setLocale } from '$lib/paraglide/runtime';
+  import { m } from '$lib/paraglide/messages';
 </script>
 
-<h1>{m.hello_world({ name: 'SvelteKit User' })}</h1>
+<h1>{m.hello_world({ name: 'Hardeep Singh Rai' })}</h1>
+
 <div>
-	<button onclick={() => setLocale('en')}>en</button>
-	<button onclick={() => setLocale('hi')}>hi</button>
-	<button onclick={() => setLocale('pa')}>pa</button>
+  <button onclick={() => setLocale('en')}>en</button>
+  <button onclick={() => setLocale('hi')}>hi</button>
+  <button onclick={() => setLocale('pa')}>pa</button>
 </div>
+
 <p>
 	If you use VSCode, install the
 

@@ -1,0 +1,15 @@
+[data-layout="cards"] {
+  @apply grid gap-6;
+}
+
+@media (min-width: 640px) {
+  [data-layout="cards"] {
+    @apply grid-cols-2;
+  }
+}
+
+@media (min-width: 1024px) {
+  [data-layout="cards"] {
+    @apply grid-cols-3;
+  }
+}

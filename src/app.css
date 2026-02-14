@@ -1,0 +1,22 @@
+/* app.css */
+
+/* ================================
+   Tailwind Foundation
+================================ */
+
+/* ================================
+   Framework / App Base
+================================ */
+@import "./lib/styles/base.css";
+
+/* ================================
+   Layout System
+================================ */
+@import "./lib/styles/layout.css";
+
+/* ================================
+   Tailwind Layers
+================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

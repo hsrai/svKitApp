@@ -1,0 +1,13 @@
+@reference "../../app.css";
+
+section {
+  @apply space-y-4;
+}
+
+output {
+  @apply text-3xl font-semibold;
+}
+
+button {
+  @apply px-4 py-2 border rounded;
+}
