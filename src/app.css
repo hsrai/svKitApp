@@ -1,22 +1,61 @@
-/* app.css */
+@import "tailwindcss";
 
-/* ================================
-   Tailwind Foundation
-================================ */
+/* ==========================================================================
+   THE BRIDGE: Tailwind v4 Native Theme
+   ========================================================================== */
+@theme {
+  /* Colors mapping to our JS-injected CSS Variables */
+  --color-background: oklch(var(--bg-l) var(--bg-c) var(--h-primary));
+  --color-primary:    oklch(var(--l-primary) var(--c-primary) var(--h-primary));
+  --color-secondary:  oklch(var(--l-primary) var(--c-primary) var(--h-secondary));
+  --color-accent:     oklch(var(--l-primary) var(--c-primary) var(--h-accent));
+  --color-text:       oklch(var(--text-l) var(--bg-c) var(--h-primary));
 
-/* ================================
-   Framework / App Base
-================================ */
-@import "./lib/styles/base.css";
+  /* Custom Theme Tokens */
+  --radius-theme: var(--radius);
+  --spacing-theme: calc(1rem * var(--gap-mult));
+  --shadow-theme: 0 10px 30px -10px rgba(0, 0, 0, var(--shadow-opacity));
+  
+  /* Overriding standard Tailwind tokens for fluid typography */
+  --font-size-base: var(--font-base);
+  --line-height-theme: var(--line-height);
+}
 
-/* ================================
-   Layout System
-================================ */
-@import "./lib/styles/layout.css";
+/* ==========================================================================
+   GLOBAL BASE STYLES
+   ========================================================================== */
+@layer base {
+  body {
+    @apply bg-background text-text transition-colors duration-500;
+    @apply min-h-screen m-0;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-theme);
+  }
+}
 
-/* ================================
-   Tailwind Layers
-================================ */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer components {
+  /* DASHBOARD BLOCK */
+  .dashboard { 
+    @apply fixed bottom-theme right-theme z-50;
+    @apply p-theme bg-background border border-text/10 rounded-theme shadow-theme; 
+  }
+  .dashboard__title { @apply text-lg font-bold mb-theme border-b border-text/10; }
+  .dashboard__item  { @apply mb-theme flex flex-col gap-1; }
+  .dashboard__label { @apply text-xs uppercase tracking-wider opacity-70; }
+  .dashboard__input { @apply p-2 bg-text/5 border border-text/10 rounded-theme text-sm; }
+
+  /* CARD BLOCK */
+  .card           { @apply bg-text/5 p-theme rounded-theme shadow-theme; }
+  .card__header   { @apply mb-theme; }
+  .card__title    { @apply text-2xl font-bold text-primary; }
+  .card__subtitle { @apply text-xs uppercase tracking-widest opacity-60; }
+  .card__body     { @apply leading-theme text-text/90; }
+  .card__footer   { @apply mt-theme flex gap-theme items-center; }
+  
+  /* UI ELEMENTS */
+  .btn           { @apply px-4 py-2 rounded-theme font-medium transition-all; }
+  .btn--primary  { @apply bg-primary text-background hover:opacity-90 active:scale-95; }
+  
+  .main-content  { @apply p-theme max-w-4xl mx-auto; }
+}
