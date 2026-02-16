@@ -1,95 +1,82 @@
 @import "tailwindcss";
 
-/* ==========================================================================
-   THE BRIDGE: Tailwind v4 Native Theme
-   ========================================================================== */
 @theme {
-  /* Colors mapping to our JS-injected CSS Variables */
-  --color-background: oklch(var(--bg-l) var(--bg-c) var(--h-primary));
-  --color-primary:    oklch(var(--l-primary) var(--c-primary) var(--h-primary));
-  --color-secondary:  oklch(var(--l-primary) var(--c-primary) var(--h-secondary));
-  --color-accent:     oklch(var(--l-primary) var(--c-primary) var(--h-accent));
-  --color-text:       oklch(var(--text-l) var(--bg-c) var(--h-primary));
-
-  /* Custom Theme Tokens */
-  --radius-theme: var(--radius);
-  --spacing-theme: calc(1rem * var(--gap-mult));
-  --shadow-theme: 0 10px 30px -10px rgba(0, 0, 0, var(--shadow-opacity));
-  
-  /* Overriding standard Tailwind tokens for fluid typography */
-  --font-size-base: var(--font-base);
-  --line-height-theme: var(--line-height);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --color-primary: var(--primary);
 }
 
-/* ==========================================================================
-   GLOBAL BASE STYLES
-   ========================================================================== */
-@layer base {
-  body {
-    @apply bg-background text-text transition-colors duration-500;
-    @apply min-h-screen m-0;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-theme);
-  }
+:root {
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-@layer components {
-  /* DASHBOARD BLOCK */
-  .dashboard { 
-    @apply fixed bottom-theme right-theme z-50;
-    @apply p-theme bg-background border border-text/10 rounded-theme shadow-theme; 
-  }
-  .dashboard__title { @apply text-lg font-bold mb-theme border-b border-text/10; }
-  .dashboard__item  { @apply mb-theme flex flex-col gap-1; }
-  .dashboard__label { @apply text-xs uppercase tracking-wider opacity-70; }
-  .dashboard__input { @apply p-2 bg-text/5 border border-text/10 rounded-theme text-sm; }
-
-  /* CARD BLOCK - Refined for Dynamic Spacing */
-  /////////////////
-  
-  .card { @apply bg-text/5 p-theme rounded-theme shadow-theme mb-theme; }
-  .card__header { @apply mb-theme; }
-  .card__title { @apply text-2xl font-bold text-primary; }
-  .card__subtitle { @apply text-sm font-medium opacity-60 italic; display: block; margin-top: 0.25rem; text-transform: none; }
-  .card__body { line-height: var(--line-height-theme); @apply text-text/90; max-width: 70ch; margin-right: auto; }
-  .card__body p { margin-bottom: calc(0.8em * var(--gap-mult)); }
-  .card__body p:last-child { margin-bottom: 0; }
-  .card__footer { @apply mt-theme flex gap-theme items-center; }
-  .card__back-link { @apply text-xs font-bold text-accent hover:underline uppercase tracking-wider; }
-  /* Ensure the Technical section/Table can still use full width if needed */
-  #data .table-container, #code .code-block { max-width: none; }
-  
-  /* UI ELEMENTS */
-  .main-content { @apply mx-auto p-theme; max-width: 1000px; }
-
-  /* BUTTONS: Distinct styles for each type */
-  .btn { @apply px-4 py-2 rounded-theme font-medium transition-all cursor-pointer inline-flex items-center justify-center; }
-  .btn--primary { @apply bg-primary text-background hover:brightness-110 active:scale-95 shadow-sm; }
-  .btn--secondary { @apply bg-secondary text-background hover:brightness-110 active:scale-95; }
-  .btn--outline { @apply border-2 border-primary text-primary hover:bg-primary/10; }
-  .btn--ghost { @apply text-text hover:bg-text/10; }
-
-  /* TABLE: Testing data density and borders */
-  .table-container { @apply overflow-x-auto my-theme border border-text/10 rounded-theme; }
-  .table { @apply w-full text-left border-collapse; }
-  .table th { @apply bg-text/5 p-3 text-xs uppercase tracking-wider font-bold border-b border-text/10; }
-  .table td { @apply p-3 border-b border-text/10 text-sm; }
-
-  /* LISTS */
-  .list { @apply ml-6 my-4 space-y-2; }
-  .list--ordered { @apply list-decimal; }
-  .list--unordered { @apply list-disc; }
-
-  .nav-links { @apply mt-8 pt-6 border-t border-text/10; }
-
-  .nav-links__grid { @apply flex flex-wrap gap-x-8 gap-y-3; }
-
-  .nav-links__item { @apply text-[11px] font-bold uppercase tracking-wider text-primary;
-
-  @apply hover:underline decoration-2 underline-offset-4;
+body {
+  background-color: var(--bg-theme);
+  color: var(--text-theme);
+  font-family: var(--font-sans);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-  /* CODE */
-  .code-block { @apply bg-text/5 p-4 rounded-theme font-mono text-sm overflow-x-auto border-l-4 border-primary my-4; }
+.main-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2rem;
 }
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .layout-grid { grid-template-columns: 1fr; }
+}
+
+/* Glass Approach B */
+.card {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--card-padding);
+  border-radius: var(--radius-theme);
+  box-shadow: 0 12px 40px -10px rgba(0,0,0,0.3);
+  margin-bottom: 2rem;
+}
+
+.card__title {
+  color: var(--primary);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* 3x3 Perceptual Grid Bridge */
+.color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+
+.btn-swatch {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  /* Bridge: Uses the --h (hue) and --c (chroma) variables from HTML */
+  background-color: lch(60% var(--c) var(--h));
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-swatch--active {
+  border-color: #fff;
+  transform: scale(0.85);
+  box-shadow: 0 0 20px lch(60% var(--c) var(--h));
+}
+
+/* Typography Stress Test Elements */
+.stress-test { max-width: 70ch; line-height: var(--line-height-theme); }
+.stress-test p { margin-bottom: calc(1em * var(--gap-mult)); }
+
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+th, td { text-align: left; padding: 1rem; border-bottom: 1px dotted currentColor; }
+pre { background: rgba(0,0,0,0.2); padding: 1.25rem; border-radius: 8px; margin: 1.5rem 0; border: 1px solid rgba(255,255,255,0.05); }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }

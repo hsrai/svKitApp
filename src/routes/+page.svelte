@@ -1,166 +1,91 @@
-<main class="main-content" id="top">
-  
-  <header class="page-header">
-  <h1 class="page-header__title">The UI Laboratory</h1>
-  <p class="page-header__tagline">Testing a User-Centric Design System with Svelte 5.</p>
-  
-  <nav class="nav-links">
-    <div class="nav-links__grid">
-      <a href="#typography" class="nav-links__item">1. Typography</a>
-      <a href="#interact" class="nav-links__item">2. Interactions</a>
-      <a href="#data" class="nav-links__item">3. Data Displays</a>
-      <a href="#reading" class="nav-links__item">4. Reading Room</a>
-      <a href="#code" class="nav-links__item">5. Technical</a>
-    </div>
-  </nav>
-  </header>
+<script>
+    import { COLOR_ANCHORS, RADIUS_MAP, PACKING_MAP, CONTRAST_MAP } from '$lib/themeConstants';
+    import { buildTheme } from '$lib/themeEngine';
 
-  <section id="typography" class="card">
-    <header class="card__header">
-      <h2 class="card__title">1. Typography</h2>
-      <p class="card__subtitle">Layman: How we represent the "Voice" of our brand.</p>
-    </header>
-    <div class="card__body">
-      <p>
-        Standard body text uses your selected <strong>Packing</strong> density. 
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. 
-        Aliquam erat volutpat. Donec et lacinia nisl.
-      </p>
-      <blockquote class="card__quote">
-        "Design is not just what it looks like and feels like. Design is how it works."
-      </blockquote>
-    </div>
-    <footer class="card__footer">
-      <a href="#top" class="card__back-link">↑ BACK TO TOP</a>
-    </footer>
-  </section>
+    let config = $state({
+        hue: 220, chroma: 20, contrast: 'NORMAL', radius: 'NORMAL', packing: 'NORMAL', isDark: true
+    });
 
-  <section id="interact" class="card">
-    <header class="card__header">
-      <h2 class="card__title">2. Interactions</h2>
-      <p class="card__subtitle">Layman: Things that react when you touch them.</p>
-    </header>
-    
-    <div class="interaction-group">
-      <div class="button-bench">
-        <p class="dashboard__label">Button Hierarchy</p>
-        <div class="button-bench__list">
-          <button class="btn btn--primary" type="button">Primary Action</button>
-          <button class="btn btn--secondary" type="button">Secondary Task</button>
-          <button class="btn btn--outline" type="button">Outline Button</button>
-          <button class="btn btn--ghost" type="button">Ghost Style</button>
-        </div>
-      </div>
+    $effect(() => { buildTheme(config); });
 
-      <form class="lab-form">
-        <div class="dashboard__item">
-          <label class="dashboard__label" for="name-field">Your Name</label>
-          <input type="text" id="name-field" class="dashboard__input" placeholder="e.g. Hardeep Rai" />
-        </div>
-        <div class="dashboard__item">
-          <label class="dashboard__label" for="role-select">Current Role</label>
-          <select id="role-select" class="dashboard__input">
-            <option>Designer</option>
-            <option>Developer</option>
-            <option>Product Manager</option>
-          </select>
-        </div>
-      </form>
-    </div>
-    <footer class="card__footer">
-      <a href="#top" class="card__back-link">↑ BACK TO TOP</a>
-    </footer>
-  </section>
+    function setAnchor(anchor) {
+        config.hue = anchor.hue;
+        config.chroma = anchor.chroma;
+        config.isDark = anchor.hue > 50; 
+    }
+</script>
 
-  <section id="data" class="card">
-    <header class="card__header">
-      <h2 class="card__title">3. Data Displays</h2>
-      <p class="card__subtitle">Layman: Organizing information so it's easy to scan.</p>
+<div class="main-container">
+    <header class="card">
+        <h1 class="card__title">System Dashboard</h1>
+        <p>LCH Atmospheric Engine v5.0 | Separation of Concern: Strict</p>
     </header>
 
-    <div class="table-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>System Part</th>
-            <th>Technology</th>
-            <th>Health</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Brain</td>
-            <td>Svelte 5 Runes</td>
-            <td><span class="badge badge--primary">Healthy</span></td>
-          </tr>
-          <tr>
-            <td>Skin</td>
-            <td>Tailwind v4</td>
-            <td><span class="badge badge--accent">Active</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="layout-grid">
+        <aside>
+            <section class="card">
+                <h2 class="card__title">3x3 Perceptual Anchors</h2>
+                <div class="color-grid">
+                    {#each COLOR_ANCHORS as a}
+                        <button 
+                            onclick={() => setAnchor(a)}
+                            class="btn-swatch {config.hue === a.hue ? 'btn-swatch--active' : ''}"
+                            style:--h={a.hue}
+                            style:--c={a.chroma}
+                            aria-label="Set theme to {a.name}"
+                            title={a.label}
+                        ></button>
+                    {/each}
+                </div>
+            </section>
+
+            <section class="card">
+                <h2 class="card__title">Refinements</h2>
+                <div class="flex flex-col gap-4">
+                    <div>
+                        <span class="text-[10px] font-black uppercase opacity-40">Layout Density</span>
+                        <div class="flex gap-2 mt-2">
+                            {#each Object.keys(PACKING_MAP) as p}
+                                <button onclick={() => config.packing = p} class="text-[10px] font-bold px-3 py-1 rounded {config.packing === p ? 'bg-white text-black' : 'bg-white/10'}">{p}</button>
+                            {/each}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <main class="stress-test">
+            <section class="card">
+                <h2 class="card__title">Stress Test: Perceptual Readability</h2>
+                
+                <p><strong>Code Analysis:</strong></p>
+                <p>Layman: This creates a color by mixing light, color-strength, and a position on the color wheel.</p>
+                <pre><code>root.style.setProperty('--bg-theme', `lch(${"${bgL}"}% ${"${finalChroma}"} ${"${hue}"})`);</code></pre>
+
+                <p><strong>Hierarchical List:</strong></p>
+                <ul>
+                    <li><strong>Perceptual Anchors:</strong> Ruby (0), Green (140), Blue (220).</li>
+                    <li><strong>Separation:</strong> Logic (Engine), Style (Skin), Structure (Skeleton).</li>
+                    <li><strong>Naked Strategy:</strong> No inline styles, only data-attribute bridges.</li>
+                </ul>
+
+                <p><strong>Data Comparison Table:</strong></p>
+                <table>
+                    <thead>
+                        <tr><th>Anchor</th><th>Hue Position</th><th>Chroma Intensity</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ruby (Warm)</td><td>0°</td><td>40</td></tr>
+                        <tr><td>Blue (Calm)</td><td>220°</td><td>35</td></tr>
+                        <tr><td>Yellow (Fresh)</td><td>70°</td><td>45</td></tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Lorem Ipsum Stress:</strong></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+            </section>
+        </main>
     </div>
-
-    <div class="badge-bench">
-      <span class="badge badge--neutral">Version 1.0</span>
-      <span class="badge badge--primary">Production Ready</span>
-    </div>
-    <footer class="card__footer">
-      <a href="#top" class="card__back-link">↑ BACK TO TOP</a>
-    </footer>
-  </section>
-
-  <section id="reading" class="card">
-    <header class="card__header">
-      <h2 class="card__title">4. The Reading Room</h2>
-      <div class="reading-meta">
-          <span>⏱ 2 MIN READ</span>
-          <span>•</span>
-          <span>THEME: USER-CENTRICITY</span>
-      </div>
-    </header>
-    
-    <div class="card__body">
-      <p>
-        <strong>On Digital Comfort:</strong> When you select <em>Comfortable</em> from your dashboard, we increase the whitespace. Whitespace is not "empty" space; it is a tool that allows the brain to process information without feeling overwhelmed.
-      </p>
-      
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
-      </p>
-
-      <p>
-        By contrast, <em>Compact</em> mode is for efficiency. It is the "Cockpit" view for users who need to see everything at once. Our <strong>Brain</strong> logic ensures that even in this dense mode, the lines never overlap and the text remains accessible.
-      </p>
-    </div>
-    <footer class="card__footer">
-      <a href="#top" class="card__back-link">↑ BACK TO TOP</a>
-    </footer>
-  </section>
-
-  <section id="code" class="card card--last">
-    <header class="card__header">
-      <h2 class="card__title">5. Technical Foundation</h2>
-      <p class="card__subtitle">Layman: The raw code powering this experience.</p>
-    </header>
-    
-    <pre class="code-block">
-function verifySystem() &lbrace;
-  const components = ["Logic", "Bridge", "Skin", "Skeleton"];
-  return components.every(c => c.status === "Ready");
-&rbrace;
-    </pre>
-
-    <div class="alert alert--info">
-      <span class="alert__icon">💡</span>
-      <div class="alert__content">
-        <strong class="alert__title">Architecture Note</strong>
-        <p class="alert__message">This page contains zero utility classes for colors or padding. Everything is controlled by the BEM "Skin".</p>
-      </div>
-    </div>
-    <footer class="card__footer">
-      <a href="#top" class="card__back-link">↑ BACK TO TOP</a>
-    </footer>
-  </section>
-</main>
+</div>
