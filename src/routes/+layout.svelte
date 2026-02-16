@@ -13,9 +13,9 @@
     
     // 2. Theme State (Svelte 5 Runes)
     let favColor = $state("#3b82f6");
-    let contrast = $state("SO_SO");
-    let edges    = $state("SO_SO");
-    let packing  = $state("SO_SO");
+    let contrast = $state("NORMAL");
+    let edges    = $state("NORMAL");
+    let packing  = $state("NORMAL");
 
     // 3. Computed Styles (Derived Rune)
     // This triggers buildTheme whenever state changes

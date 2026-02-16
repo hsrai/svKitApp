@@ -45,17 +45,51 @@
   .dashboard__label { @apply text-xs uppercase tracking-wider opacity-70; }
   .dashboard__input { @apply p-2 bg-text/5 border border-text/10 rounded-theme text-sm; }
 
-  /* CARD BLOCK */
-  .card           { @apply bg-text/5 p-theme rounded-theme shadow-theme; }
-  .card__header   { @apply mb-theme; }
-  .card__title    { @apply text-2xl font-bold text-primary; }
-  .card__subtitle { @apply text-xs uppercase tracking-widest opacity-60; }
-  .card__body     { @apply leading-theme text-text/90; }
-  .card__footer   { @apply mt-theme flex gap-theme items-center; }
+  /* CARD BLOCK - Refined for Dynamic Spacing */
+  /////////////////
+  
+  .card { @apply bg-text/5 p-theme rounded-theme shadow-theme mb-theme; }
+  .card__header { @apply mb-theme; }
+  .card__title { @apply text-2xl font-bold text-primary; }
+  .card__subtitle { @apply text-sm font-medium opacity-60 italic; display: block; margin-top: 0.25rem; text-transform: none; }
+  .card__body { line-height: var(--line-height-theme); @apply text-text/90; max-width: 70ch; margin-right: auto; }
+  .card__body p { margin-bottom: calc(0.8em * var(--gap-mult)); }
+  .card__body p:last-child { margin-bottom: 0; }
+  .card__footer { @apply mt-theme flex gap-theme items-center; }
+  .card__back-link { @apply text-xs font-bold text-accent hover:underline uppercase tracking-wider; }
+  /* Ensure the Technical section/Table can still use full width if needed */
+  #data .table-container, #code .code-block { max-width: none; }
   
   /* UI ELEMENTS */
-  .btn           { @apply px-4 py-2 rounded-theme font-medium transition-all; }
-  .btn--primary  { @apply bg-primary text-background hover:opacity-90 active:scale-95; }
-  
-  .main-content  { @apply p-theme max-w-4xl mx-auto; }
+  .main-content { @apply mx-auto p-theme; max-width: 1000px; }
+
+  /* BUTTONS: Distinct styles for each type */
+  .btn { @apply px-4 py-2 rounded-theme font-medium transition-all cursor-pointer inline-flex items-center justify-center; }
+  .btn--primary { @apply bg-primary text-background hover:brightness-110 active:scale-95 shadow-sm; }
+  .btn--secondary { @apply bg-secondary text-background hover:brightness-110 active:scale-95; }
+  .btn--outline { @apply border-2 border-primary text-primary hover:bg-primary/10; }
+  .btn--ghost { @apply text-text hover:bg-text/10; }
+
+  /* TABLE: Testing data density and borders */
+  .table-container { @apply overflow-x-auto my-theme border border-text/10 rounded-theme; }
+  .table { @apply w-full text-left border-collapse; }
+  .table th { @apply bg-text/5 p-3 text-xs uppercase tracking-wider font-bold border-b border-text/10; }
+  .table td { @apply p-3 border-b border-text/10 text-sm; }
+
+  /* LISTS */
+  .list { @apply ml-6 my-4 space-y-2; }
+  .list--ordered { @apply list-decimal; }
+  .list--unordered { @apply list-disc; }
+
+  .nav-links { @apply mt-8 pt-6 border-t border-text/10; }
+
+  .nav-links__grid { @apply flex flex-wrap gap-x-8 gap-y-3; }
+
+  .nav-links__item { @apply text-[11px] font-bold uppercase tracking-wider text-primary;
+
+  @apply hover:underline decoration-2 underline-offset-4;
+}
+
+  /* CODE */
+  .code-block { @apply bg-text/5 p-4 rounded-theme font-mono text-sm overflow-x-auto border-l-4 border-primary my-4; }
 }
