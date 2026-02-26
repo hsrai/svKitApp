@@ -2,24 +2,23 @@ export const applyPreferences = (prefs: {
     hue: number,
     density: number,
     contrast: number,
-    radius: number
+    radius: number,
+    mode: 'light' | 'dark'
 }) => {
     const root = document.documentElement;
+    const isDark = prefs.mode === 'dark';
     
-    // 1. Perceptual Color Logic
-    // Using OKLCH ensures the 'vibe' changes but 'readability' stays constant
+    // 1. Color Logic (OKLCH)
     root.style.setProperty('--primary', `oklch(${prefs.contrast}% 0.15 ${prefs.hue})`);
-    root.style.setProperty('--accent', `oklch(${prefs.contrast}% 0.15 ${prefs.hue + 120})`); 
+    root.style.setProperty('--accent', `oklch(${prefs.contrast}% 0.15 ${prefs.hue + 150})`); 
     
-    // Background logic: Light mode for ERP focus
-    root.style.setProperty('--bg-theme', `oklch(99% 0.01 ${prefs.hue})`);
-    root.style.setProperty('--card-bg', `oklch(100% 0 0)`);
-    root.style.setProperty('--text-theme', `oklch(20% 0.02 ${prefs.hue})`);
+    // Backgrounds based on Mode
+    root.style.setProperty('--bg-theme', isDark ? `oklch(12% 0.01 ${prefs.hue})` : `oklch(99% 0.01 ${prefs.hue})`);
+    root.style.setProperty('--card-bg', isDark ? `oklch(18% 0.02 ${prefs.hue})` : `oklch(100% 0 0)`);
+    root.style.setProperty('--text-theme', isDark ? `oklch(98% 0.01 ${prefs.hue})` : `oklch(15% 0.02 ${prefs.hue})`);
 
-    // 2. The Physics of Space
+    // 2. Structural Logic
     root.style.setProperty('--gap-mult', prefs.density.toString());
     root.style.setProperty('--radius-theme', `${prefs.radius}rem`);
-    
-    // 3. Mathematical Typography
-    root.style.setProperty('--base-font-size', `${0.9 + (prefs.density * 0.05)}rem`);
+    root.style.setProperty('--base-font-size', `${0.85 + (prefs.density * 0.1)}rem`);
 };
