@@ -1,53 +1,52 @@
 @reference "../../app.css";
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    border-bottom: 3px double var(--primary);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
-}
-
-address { font-style: normal; font-size: 0.9rem; opacity: 0.8; }
-
-/* The Add Button - Styled via attribute to keep HTML naked */
-section > button[onclick] {
-    cursor: pointer;
-    margin-top: 2rem;
-    padding: 0.75rem 1.5rem;
-    background: var(--primary);
-    color: var(--bg-theme);
-    border: none;
-    border-radius: var(--radius-theme);
-    font-weight: bold;
-    transition: transform 0.1s;
-}
-
-section > button[onclick]:active { transform: scale(0.98); }
-
 footer {
-    margin-top: 4rem;
+    margin-top: 3rem;
     display: flex;
     justify-content: flex-end;
 }
 
 aside {
-    width: 320px;
-    padding: 2rem;
+    width: 100%;
+    max-width: 340px;
+    padding: 1.5rem;
     background: var(--card-bg);
+    border: 1px solid var(--primary);
     border-radius: var(--radius-theme);
 }
 
+/* Grid logic for aligned pairs: Name on left, Value on right */
 dl {
     display: grid;
-    grid-template-cols: 1fr auto;
-    gap: 1rem;
+    grid-template-columns: 1fr auto; 
+    gap: 0.5rem 1rem;
+    align-items: baseline;
+    margin: 0;
+}
+
+dt {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+dd {
+    margin: 0;
+    text-align: right;
+    font-family: ui-monospace, monospace;
+    font-weight: 700;
+}
+
+/* Visual emphasis for the Grand Total row */
+dt:last-of-type, 
+dd:last-of-type {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--primary);
+    font-size: 1.25rem;
 }
 
 output {
-    font-size: 2rem;
-    font-weight: 900;
     color: var(--accent);
-    font-family: monospace;
+    font-weight: 900;
 }

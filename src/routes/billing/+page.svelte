@@ -2,61 +2,104 @@
     import { GLOBAL_CONSTANTS } from '$lib/global.config';
     import { generateSummary } from './engine';
     
-    // Bundle Imports
+    // 1. Global Standard Bundles (ERPs use these across all modules)
     import '$lib/styles/bundles/forms.css';
     import '$lib/styles/bundles/tables.css';
+    
+    // 2. Local Feature Identity (Specific to Billing)
     import './billing-local.css';
 
+    // 3. State Management (Svelte 5 Runes)
+    let customerName = $state('');
     let items = $state([
-        { id: crypto.randomUUID(), name: 'Apples', quantity: 2, rate: 50 }
+        { id: crypto.randomUUID(), name: 'Apples', quantity: 10, rate: 50 }
     ]);
-    let customer = $state('');
-    let summary = $derived(generateSummary(customer, items));
 
-    const add = () => items.push({ id: crypto.randomUUID(), name: '', quantity: 0, rate: 0 });
+    // 4. Derived Logic (The 'Brain' - updates automatically)
+    let summary = $derived(generateSummary(customerName, items));
+
+    const addItem = () => {
+        items.push({ id: crypto.randomUUID(), name: '', quantity: 0, rate: 0 });
+    };
+
+    const removeItem = (id: string) => {
+        items = items.filter(i => i.id !== id);
+    };
 </script>
 
 <main>
     <header>
         <h1>{GLOBAL_CONSTANTS.companyName}</h1>
-        <p>{GLOBAL_CONSTANTS.hqAddress} • {summary.date}</p>
+        <address>
+            {GLOBAL_CONSTANTS.hqAddress} | <time>{summary.date}</time>
+        </address>
     </header>
 
     <section>
         <fieldset>
-            <legend>Customer</legend>
-            <input type="text" bind:value={customer} placeholder="Enter Name..." />
+            <legend>Customer Details</legend>
+            <input 
+                type="text" 
+                bind:value={customerName} 
+                placeholder="Enter Customer Name" 
+            />
         </fieldset>
 
         <table data-table-type="responsive">
+            <caption>Fruit Sales Invoice</caption>
             <thead>
                 <tr>
-                    <th>Item</th>
+                    <th>Description</th>
                     <th>Qty</th>
                     <th>Rate</th>
-                    <th>Total</th>
+                    <th>Amount</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {#each items as item (item.id)}
                     <tr>
-                        <td data-label="Item"><input bind:value={item.name} /></td>
-                        <td data-label="Qty"><input type="number" bind:value={item.quantity} /></td>
-                        <td data-label="Rate"><input type="number" bind:value={item.rate} /></td>
-                        <td data-label="Total">₹{item.quantity * item.rate}</td>
+                        <td data-label="Description">
+                            <input bind:value={item.name} placeholder="Item name" />
+                        </td>
+                        <td data-label="Qty">
+                            <input type="number" bind:value={item.quantity} />
+                        </td>
+                        <td data-label="Rate">
+                            <input type="number" bind:value={item.rate} />
+                        </td>
+                        <td data-label="Amount">
+                            {summary.currency}{(item.quantity * item.rate).toFixed(2)}
+                        </td>
+                        <td data-label="Action">
+                            <button type="button" onclick={() => removeItem(item.id)}>
+                                Remove
+                            </button>
+                        </td>
                     </tr>
                 {/each}
             </tbody>
         </table>
-        <button type="button" onclick={add}>+ Add Line Item</button>
+
+        <button type="button" onclick={addItem}>
+            + Add Line Item
+        </button>
     </section>
 
     <footer>
         <aside>
-            <h2>Summary</h2>
+            <h2>Invoice Summary</h2>
             <dl>
-                <dt>Subtotal</dt> <dd>₹{summary.subTotal}</dd>
-                <dt>Grand Total</dt> <dd><output>₹{summary.grandTotal}</output></dd>
+                <dt>Sub-total</dt>
+                <dd>{summary.currency}{summary.subTotal.toFixed(2)}</dd>
+                
+                <dt>GST ({summary.taxRateLabel})</dt>
+                <dd>{summary.currency}{summary.taxAmount.toFixed(2)}</dd>
+                
+                <dt>Grand Total</dt>
+                <dd>
+                    <output>{summary.currency}{summary.grandTotal.toFixed(2)}</output>
+                </dd>
             </dl>
         </aside>
     </footer>
