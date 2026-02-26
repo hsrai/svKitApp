@@ -8,45 +8,57 @@ footer {
 
 aside {
     width: 100%;
-    max-width: 340px;
+    max-width: 350px;
     padding: 1.5rem;
     background: var(--card-bg);
-    border: 1px solid var(--primary);
+    border: 1px solid color-mix(in oklch, var(--primary), transparent 80%);
     border-radius: var(--radius-theme);
 }
 
-/* Grid logic for aligned pairs: Name on left, Value on right */
+/* THE ACCOUNTING GRID */
 dl {
     display: grid;
     grid-template-columns: 1fr auto; 
-    gap: 0.5rem 1rem;
-    align-items: baseline;
+    gap: 0.75rem 0; 
+    align-items: center;
     margin: 0;
 }
 
 dt {
+    font-family: inherit;
     font-size: 0.9rem;
-    font-weight: 500;
-    opacity: 0.8;
+    opacity: 0.7;
+    text-align: left;
 }
 
 dd {
     margin: 0;
-    text-align: right;
-    font-family: ui-monospace, monospace;
-    font-weight: 700;
+    text-align: right; 
+    justify-self: end; 
+    font-family: ui-monospace, "Cascadia Code", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+    min-width: 160px; /* Essential for vertical decimal stacking */
 }
 
-/* Visual emphasis for the Grand Total row */
+/* THE GRAND TOTAL (Option 3: Semantic Emphasis) */
 dt:last-of-type, 
 dd:last-of-type {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 2px solid var(--primary);
-    font-size: 1.25rem;
+    /* Uses a strong border instead of a background to keep alignment perfect */
+    border-top: 2px solid var(--primary); 
+    color: var(--primary);
+    font-size: 1.1rem; /* Slightly larger, but monospace keeps the '.' in line */
+    font-weight: 900;
+}
+
+/* The Amount itself in Grand Total */
+dd:last-of-type {
+    /* No padding needed here, so it aligns perfectly with the rows above */
 }
 
 output {
-    color: var(--accent);
-    font-weight: 900;
+    font: inherit;
+    color: inherit;
 }
