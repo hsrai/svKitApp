@@ -1,148 +1,29 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", system-ui, sans-serif;
-  --color-primary: var(--primary);
+html {
+    background-color: var(--bg-theme);
+    color: var(--text-theme);
+    font-size: var(--base-font-size);
+    font-family: 'Inter', system-ui, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-:root {
-  transition: background-color 0.4s ease, color 0.4s ease;
+main {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: calc(var(--gap-mult) * 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap-mult) * 2.5rem);
 }
 
-body {
-  background-color: var(--bg-theme);
-  color: var(--text-theme);
-  font-family: var(--font-sans);
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-}
+/* Global Tag Governance */
+h1 { color: var(--primary); font-weight: 800; font-size: 2rem; }
+button { cursor: pointer; border: none; font-family: inherit; }
+input { font-family: inherit; font-size: inherit; }
 
-/* Layout for Stress Testing */
-.main-content {
-  max-width: 90ch;
-  margin: 0 auto;
-  padding: 5rem 2rem;
-}
-
-/* Floating Collapsible Control Panel */
-.lab-controls {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 320px;
-  z-index: 1000;
-  background-color: var(--card-bg);
-  backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.lab-controls--collapsed {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-}
-
-.lab-header-btn {
-  width: 100%;
-  border: none;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-  color: inherit;
-}
-
-.lab-body {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* 3x3 Perceptual Grid Bridge */
-.color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-
-.btn-swatch {
-  aspect-ratio: 1;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  background-color: lch(60% var(--c) var(--h));
-  transition: transform 0.2s ease;
-}
-.btn-swatch--active { border-color: #fff; transform: scale(0.9); box-shadow: 0 0 15px lch(60% var(--c) var(--h)); }
-
-/* Card Elements for Stress Test */
-.card {
-  background-color: var(--card-bg);
-  backdrop-filter: blur(20px);
-  padding: var(--card-padding);
-  border-radius: var(--radius-theme);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 3rem;
-}
-
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 2rem; }
-h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--primary); }
-p { line-height: var(--line-height-theme); margin-bottom: calc(1rem * var(--gap-mult)); opacity: 0.9; }
-
-table { width: 100%; border-collapse: collapse; margin: 2rem 0; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.02); }
-th { background: rgba(255,255,255,0.05); text-align: left; padding: 1rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; }
-td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
-
-.card-quote { 
-  border-left: 5px solid var(--primary); 
-  padding: 1.5rem 2rem; 
-  margin: 2.5rem 0; 
-  font-size: 1.25rem; 
-  font-style: italic; 
-  background: rgba(255,255,255,0.03); 
-}
-
-.stress-list { margin: 2rem 0; padding-left: 1.5rem; list-style: none; }
-.stress-list li { margin-bottom: 0.75rem; position: relative; }
-
-pre { 
-  background: #000; 
-  color: #a6e22e; 
-  padding: 1.5rem; 
-  border-radius: 10px; 
-  font-family: 'monospace'; 
-  font-size: 0.85rem; 
-  overflow-x: auto; 
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.btn-primary { 
-  background: var(--primary); 
-  color: #000; 
-  padding: 0.75rem 2rem; 
-  font-weight: 900; 
-  text-transform: uppercase; 
-  font-size: 0.75rem; 
-  letter-spacing: 0.1em; 
-  border-radius: 99px; 
-  border: none; 
-  cursor: pointer;
-}
-
-.btn-secondary { 
-  border: 1px solid currentColor; 
-  background: transparent; 
-  color: inherit; 
-  padding: 0.75rem 2rem; 
-  font-weight: 900; 
-  text-transform: uppercase; 
-  font-size: 0.75rem; 
-  letter-spacing: 0.1em; 
-  border-radius: 99px; 
-  cursor: pointer; 
-  opacity: 0.6;
+/* ERP Responsive Variable Guard */
+@media (max-width: 768px) {
+    :root { --gap-mult: 0.8; }
+    main { padding: 1rem; }
 }

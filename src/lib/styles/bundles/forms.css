@@ -1,10 +1,31 @@
-@reference "../../../app.css"; /* Adjust path to where your @import "tailwindcss"; is */
+@reference "../../../app.css";
 
-fieldset { @apply border-none p-0 flex flex-col gap-2; }
-legend { @apply text-sm font-bold uppercase tracking-widest opacity-70; }
-input {
-  @apply bg-transparent border-b p-2 outline-none transition-colors;
-  border-color: color-mix(in lch, var(--bg-theme), var(--text-theme) 20%);
+fieldset {
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
-input:focus { border-color: var(--primary); }
-label { @apply sr-only; }
+
+legend {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+}
+
+input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--primary);
+    padding: 0.5rem 0;
+    color: var(--text-theme);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-bottom-width: 2px;
+}

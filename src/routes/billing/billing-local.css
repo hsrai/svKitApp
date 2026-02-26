@@ -1,21 +1,53 @@
 @reference "../../app.css";
 
-main { @apply mx-auto max-w-4xl p-8; }
-header { @apply mb-10 border-b-2 pb-4 flex flex-col md:flex-row justify-between items-baseline; }
-footer { @apply mt-12 flex justify-end; }
-aside { @apply w-full md:w-80 p-6 rounded-lg border bg-slate-50/5; }
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 3px double var(--primary);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+address { font-style: normal; font-size: 0.9rem; opacity: 0.8; }
+
+/* The Add Button - Styled via attribute to keep HTML naked */
+section > button[onclick] {
+    cursor: pointer;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: var(--bg-theme);
+    border: none;
+    border-radius: var(--radius-theme);
+    font-weight: bold;
+    transition: transform 0.1s;
+}
+
+section > button[onclick]:active { transform: scale(0.98); }
+
+footer {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+aside {
+    width: 320px;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: var(--radius-theme);
+}
+
+dl {
+    display: grid;
+    grid-template-cols: 1fr auto;
+    gap: 1rem;
+}
 
 output {
-  @apply font-mono text-3xl font-bold;
-  color: var(--accent);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    font-family: monospace;
 }
-
-.add-btn {
-  @apply cursor-pointer font-bold px-6 py-3 mt-6 self-start transition-transform active:scale-95;
-  background: var(--primary);
-  color: var(--bg-theme);
-  border-radius: var(--radius-ui);
-}
-
-dl { @apply grid grid-cols-2 gap-y-4; }
-dd { @apply text-right font-bold; }

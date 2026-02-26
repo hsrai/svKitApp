@@ -1,45 +1,46 @@
 @reference "../../../app.css";
 
-[data-table-type="responsive"] {
-  @apply w-full border-collapse;
-  margin-top: calc(1rem * var(--gap-mult));
-  line-height: var(--line-height-ui);
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: calc(2rem * var(--gap-mult));
 }
 
-[data-table-type="responsive"] th {
-  @apply text-left p-3 font-bold uppercase tracking-tight border-b;
-  color: var(--primary);
-  border-color: var(--primary);
-}
-
-[data-table-type="responsive"] td {
-  @apply p-3 border-b;
-  border-color: color-mix(in lch, var(--bg-theme), var(--text-theme) 10%);
-}
-
-@media (max-width: 640px) {
-  [data-table-type="responsive"], 
-  [data-table-type="responsive"] tbody, 
-  [data-table-type="responsive"] tr, 
-  [data-table-type="responsive"] td { @apply block; }
-
-  [data-table-type="responsive"] thead { @apply hidden; }
-
-  [data-table-type="responsive"] tr {
-    @apply mb-6 border;
-    border-color: var(--primary);
-    border-radius: var(--radius-ui);
-    padding: var(--spacing-card-p);
-    background: var(--card-bg);
-  }
-
-  [data-table-type="responsive"] td {
-    @apply flex justify-between py-2 border-none text-right;
-  }
-
-  [data-table-type="responsive"] td::before {
-    content: attr(data-label);
-    @apply font-bold text-left mr-4;
+th {
+    text-align: left;
+    padding: calc(0.75rem * var(--gap-mult));
+    border-bottom: 2px solid var(--primary);
     color: var(--primary);
-  }
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+td {
+    padding: calc(0.75rem * var(--gap-mult));
+    border-bottom: 1px solid color-mix(in lch, var(--primary), transparent 80%);
+}
+
+/* Block Reflow for ERP Mobile responsiveness */
+@media (max-width: 768px) {
+    thead { display: none; }
+    tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--primary);
+        border-radius: var(--radius-theme);
+        padding: 1rem;
+        background: var(--card-bg);
+    }
+    td {
+        display: flex;
+        justify-content: space-between;
+        border: none;
+        padding: 0.25rem 0;
+    }
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: var(--primary);
+    }
 }
