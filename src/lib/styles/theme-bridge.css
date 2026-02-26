@@ -1,0 +1,11 @@
+@theme {
+  --color-background: var(--bg-theme);
+  --color-text: var(--text-theme);
+  --color-primary: var(--primary);
+  /* Accent is complement (180 deg shift) */
+  --color-accent: var(--accent); 
+  
+  --spacing-card-p: var(--card-padding);
+  --radius-ui: var(--radius-theme);
+  --line-height-ui: var(--line-height-theme);
+}

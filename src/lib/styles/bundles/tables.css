@@ -1,0 +1,45 @@
+@reference "../../../app.css";
+
+[data-table-type="responsive"] {
+  @apply w-full border-collapse;
+  margin-top: calc(1rem * var(--gap-mult));
+  line-height: var(--line-height-ui);
+}
+
+[data-table-type="responsive"] th {
+  @apply text-left p-3 font-bold uppercase tracking-tight border-b;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+[data-table-type="responsive"] td {
+  @apply p-3 border-b;
+  border-color: color-mix(in lch, var(--bg-theme), var(--text-theme) 10%);
+}
+
+@media (max-width: 640px) {
+  [data-table-type="responsive"], 
+  [data-table-type="responsive"] tbody, 
+  [data-table-type="responsive"] tr, 
+  [data-table-type="responsive"] td { @apply block; }
+
+  [data-table-type="responsive"] thead { @apply hidden; }
+
+  [data-table-type="responsive"] tr {
+    @apply mb-6 border;
+    border-color: var(--primary);
+    border-radius: var(--radius-ui);
+    padding: var(--spacing-card-p);
+    background: var(--card-bg);
+  }
+
+  [data-table-type="responsive"] td {
+    @apply flex justify-between py-2 border-none text-right;
+  }
+
+  [data-table-type="responsive"] td::before {
+    content: attr(data-label);
+    @apply font-bold text-left mr-4;
+    color: var(--primary);
+  }
+}

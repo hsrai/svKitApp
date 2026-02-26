@@ -1,0 +1,179 @@
+.
+├── AGENTS.md
+├── README.md
+├── appcss.css
+├── debug-storybook.log
+├── drizzle.config.ts
+├── e2e
+│   └── demo.test.ts
+├── eslint.config.js
+├── jump-sveltekit-enterprise.zip
+├── messages
+│   ├── en.json
+│   ├── hi.json
+│   └── pa.json
+├── package-lock.json
+├── package.json
+├── playwright.config.ts
+├── project.inlang
+│   ├── README.md
+│   ├── cache
+│   │   └── plugins
+│   │       ├── 2sy648wh9sugi
+│   │       └── ygx0uiahq6uw
+│   ├── project_id
+│   └── settings.json
+├── src
+│   ├── App.svelte
+│   ├── app.css
+│   ├── app.css~
+│   ├── app.d.ts
+│   ├── app.html
+│   ├── app.html~
+│   ├── components
+│   │   ├── SettingsPanel.svelte
+│   │   └── Stage.svelte
+│   ├── demo.spec.ts
+│   ├── hooks.server.ts
+│   ├── hooks.ts
+│   ├── lib
+│   │   ├── animation
+│   │   │   └── jumpAnimator.ts
+│   │   ├── audio
+│   │   │   └── speech.ts
+│   │   ├── canvas
+│   │   │   └── traceRenderer.ts
+│   │   ├── config
+│   │   │   └── jumpConfig.ts
+│   │   ├── geometry
+│   │   │   ├── bezierArc.ts
+│   │   │   └── parabola.ts
+│   │   ├── images
+│   │   │   ├── github.svg
+│   │   │   ├── svelte-logo.svg
+│   │   │   ├── svelte-welcome.png
+│   │   │   └── svelte-welcome.webp
+│   │   ├── paraglide
+│   │   │   ├── README.md
+│   │   │   ├── messages
+│   │   │   │   ├── _index.js
+│   │   │   │   ├── en.js
+│   │   │   │   ├── hi.js
+│   │   │   │   └── pa.js
+│   │   │   ├── messages.js
+│   │   │   ├── registry.js
+│   │   │   ├── runtime.js
+│   │   │   └── server.js
+│   │   ├── server
+│   │   │   ├── auth.ts
+│   │   │   └── db
+│   │   │       ├── auth.schema.ts
+│   │   │       ├── index.ts
+│   │   │       └── schema.ts
+│   │   ├── state
+│   │   │   └── jumpStore.ts
+│   │   ├── styles
+│   │   │   ├── base.css
+│   │   │   ├── base.css~
+│   │   │   ├── layout.css
+│   │   │   └── layout.css~
+│   │   ├── themeConstants.js
+│   │   ├── themeConstants.js~
+│   │   ├── themeEngine.js
+│   │   ├── themeEngine.js~
+│   │   ├── themeGenerator.js
+│   │   ├── themeGenerator.js~
+│   │   └── utils
+│   ├── routes
+│   │   ├── +layout.svelte
+│   │   ├── +layout.svelte~
+│   │   ├── +page.svelte
+│   │   ├── +page.svelte~
+│   │   ├── +page.ts
+│   │   ├── Counter.svelte
+│   │   ├── Header.svelte
+│   │   ├── PlusLayout.SvelteOrg
+│   │   ├── PlusPage.SvelteORG
+│   │   ├── about
+│   │   │   ├── +page.svelte
+│   │   │   └── +page.ts
+│   │   ├── bollywood
+│   │   │   ├── +page.svelte
+│   │   │   ├── +page.svelte~
+│   │   │   ├── bollywood.data.ts
+│   │   │   └── style.css
+│   │   ├── bollywood2
+│   │   │   └── +page.svelte
+│   │   ├── counter
+│   │   │   ├── +page.svelte
+│   │   │   ├── +page.svelte~
+│   │   │   ├── counter.logic.ts
+│   │   │   ├── style.css
+│   │   │   ├── style.cssDeleted
+│   │   │   └── style.css~
+│   │   ├── demo
+│   │   │   ├── +page.svelte
+│   │   │   ├── better-auth
+│   │   │   │   ├── +page.server.ts
+│   │   │   │   ├── +page.svelte
+│   │   │   │   └── login
+│   │   │   │       ├── +page.server.ts
+│   │   │   │       └── +page.svelte
+│   │   │   └── paraglide
+│   │   │       ├── +page.svelte
+│   │   │       └── +page.svelte~
+│   │   ├── jump
+│   │   │   └── +page.svelte
+│   │   ├── layout.css
+│   │   ├── page.svelte.spec.ts
+│   │   └── sverdle
+│   │       ├── +page.server.ts
+│   │       ├── +page.svelte
+│   │       ├── game.ts
+│   │       ├── how-to-play
+│   │       │   ├── +page.svelte
+│   │       │   └── +page.ts
+│   │       └── words.server.ts
+│   └── stories
+│       ├── Button.stories.svelte
+│       ├── Button.svelte
+│       ├── Configure.mdx
+│       ├── Header.stories.svelte
+│       ├── Header.svelte
+│       ├── Page.stories.svelte
+│       ├── Page.svelte
+│       ├── assets
+│       │   ├── accessibility.png
+│       │   ├── accessibility.svg
+│       │   ├── addon-library.png
+│       │   ├── assets.png
+│       │   ├── avif-test-image.avif
+│       │   ├── context.png
+│       │   ├── discord.svg
+│       │   ├── docs.png
+│       │   ├── figma-plugin.png
+│       │   ├── github.svg
+│       │   ├── share.png
+│       │   ├── styling.png
+│       │   ├── testing.png
+│       │   ├── theming.png
+│       │   ├── tutorials.svg
+│       │   └── youtube.svg
+│       ├── button.css
+│       ├── header.css
+│       └── page.css
+├── static
+│   ├── favicon.svg
+│   └── robots.txt
+├── svelte.config.js
+├── tailwind.config.cjstailwind.config.cjs
+├── tailwind.config.cjs~
+├── tree.md
+├── tree.md~
+├── tree.txt
+├── tsconfig.json
+├── twc.cjs
+├── vite.config.ts
+└── vitest.shims.d.ts
+
+2063 directories, 22218 files

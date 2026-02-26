@@ -1,0 +1,21 @@
+@reference "../../app.css";
+
+main { @apply mx-auto max-w-4xl p-8; }
+header { @apply mb-10 border-b-2 pb-4 flex flex-col md:flex-row justify-between items-baseline; }
+footer { @apply mt-12 flex justify-end; }
+aside { @apply w-full md:w-80 p-6 rounded-lg border bg-slate-50/5; }
+
+output {
+  @apply font-mono text-3xl font-bold;
+  color: var(--accent);
+}
+
+.add-btn {
+  @apply cursor-pointer font-bold px-6 py-3 mt-6 self-start transition-transform active:scale-95;
+  background: var(--primary);
+  color: var(--bg-theme);
+  border-radius: var(--radius-ui);
+}
+
+dl { @apply grid grid-cols-2 gap-y-4; }
+dd { @apply text-right font-bold; }
