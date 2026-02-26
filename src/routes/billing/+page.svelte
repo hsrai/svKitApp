@@ -1,6 +1,7 @@
 <script lang="ts">
     import { GLOBAL_CONSTANTS } from '$lib/global.config';
     import { generateSummary } from './engine';
+    import { FRUIT_INVENTORY } from '$lib/inventory.config';
     
     // 1. Global Standard Bundles (ERPs use these across all modules)
     import '$lib/styles/bundles/forms.css';
@@ -25,6 +26,17 @@
     const removeItem = (id: string) => {
         items = items.filter(i => i.id !== id);
     };
+
+    const handleProductChange = (item: any, event: Event) => {
+        const select = event.target as HTMLSelectElement;
+        const selectedFruit = FRUIT_INVENTORY.find(f => f.name === select.value);
+        
+        if (selectedFruit) {
+            item.name = selectedFruit.name;
+            item.rate = selectedFruit.rate; // Auto-fill the rate
+        }
+    };
+
 </script>
 
 <main>
@@ -57,27 +69,32 @@
                 </tr>
             </thead>
             <tbody>
-                {#each items as item (item.id)}
-                    <tr>
-                        <td data-label="Description">
-                            <input bind:value={item.name} placeholder="Item name" />
-                        </td>
-                        <td data-label="Qty">
-                            <input type="number" bind:value={item.quantity} />
-                        </td>
-                        <td data-label="Rate">
-                            <input type="number" bind:value={item.rate} />
-                        </td>
-                        <td data-label="Amount">
-                            {summary.currency}{(item.quantity * item.rate).toFixed(2)}
-                        </td>
-                        <td data-label="Action">
-                            <button type="button" onclick={() => removeItem(item.id)}>
-                                Remove
-                            </button>
-                        </td>
-                    </tr>
+
+
+{#each items as item (item.id)}
+    <tr>
+        <td data-label="Description">
+            <select 
+                value={item.name} 
+                onchange={(e) => handleProductChange(item, e)}
+            >
+                <option value="" disabled selected>Select a Fruit</option>
+                {#each FRUIT_INVENTORY as fruit}
+                    <option value={fruit.name}>{fruit.name}</option>
                 {/each}
+            </select>
+        </td>
+        <td data-label="Qty">
+            <input type="number" bind:value={item.quantity} min="0" />
+        </td>
+        <td data-label="Rate">
+            <input type="number" bind:value={item.rate} />
+        </td>
+        <td data-label="Amount">
+            {summary.currency}{(item.quantity * item.rate).toFixed(2)}
+        </td>
+        </tr>
+{/each}
             </tbody>
         </table>
 

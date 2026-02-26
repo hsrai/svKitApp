@@ -1,31 +1,90 @@
 @reference "../../../app.css";
 
+/**
+ * ERP FORM GOVERNANCE
+ * Targets standard HTML5 form elements.
+ * Variables are provided by themeEngine.ts
+ */
+
+/* Container for label/input pairs */
 fieldset {
-    border: none;
-    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: calc(var(--gap-mult) * 0.5rem);
+    border: none;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
 }
 
+/* Form Section Headers */
 legend {
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.6;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
 }
 
-input {
+/* Shared Input & Select Styles */
+input, 
+select, 
+textarea {
+    width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--primary);
-    padding: 0.5rem 0;
+    /* The "Naked" ERP underline style */
+    border-bottom: 1px solid color-mix(in oklch, var(--text-theme), transparent 80%);
+    padding: calc(var(--gap-mult) * 0.5rem) 0;
     color: var(--text-theme);
+    font-family: inherit;
+    font-size: inherit;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0;
 }
 
-input:focus {
-    border-bottom-width: 2px;
+/* Interactive States */
+input:focus, 
+select:focus, 
+textarea:focus {
+    border-bottom: 2px solid var(--primary);
+}
+
+input::placeholder {
+    color: var(--text-theme);
+    opacity: 0.4;
+}
+
+/* Specific Select Styling (Custom Arrow) */
+select {
+    cursor: pointer;
+    appearance: none; /* Removes default browser styling */
+    /* Custom SVG Arrow using the primary theme color */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1em;
+    padding-right: 2rem;
+}
+
+/* Chrome/Safari fix for date/number inputs */
+input::-webkit-inner-spin-button,
+input::-webkit-calendar-picker-indicator {
+    filter: invert(var(--is-dark-check, 0)); /* Needs engine to set --is-dark-check */
+    cursor: pointer;
+}
+
+/* Table-specific input adjustments (removes padding for density) */
+td input, 
+td select {
+    border-bottom: 1px transparent;
+    padding: 0.25rem;
+}
+
+td input:focus, 
+td select:focus {
+    background: color-mix(in oklch, var(--primary), transparent 95%);
+    border-bottom: 1px solid var(--primary);
 }
